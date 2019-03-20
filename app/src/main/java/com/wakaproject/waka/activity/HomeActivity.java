@@ -75,6 +75,8 @@ public class HomeActivity extends BaseActivity {
 //                100, 100, 11990000, wakadeal4,"Đồng Hồ Thông Minh Apple Watch Series 4 GPS Sport band VN/A sở hữu thiết kế không viền nhờ phần màn hình lớn hơn và được bo cong ở các góc. Nhờ vậy, kích thước của màn hình đã tăng 30%"));
 //        productDAO.insertProduct(new Product("ID06", "Chuột Chơi Game Có Dây Logitech G102", "WakaDeals",
 //                100, 100, 399000, wakadeal5,"Ngoài ra, sản phẩm còn có điểm nổi bật là được trang bị công nghệ LED RGB 16.8 triệu màu. Với 6 nút, giúp bạn có thể lập trình thông qua phần mềm Logitech Gaming Software, người dùng có thể dễ dàng thiết lập các thao tác Macro"));
+//        productDAO.insertProduct(new Product("ID06", "Chuột Chơi Game Có Dây Logitech G102", "WakaDeals",
+//                100, 100, 399000, wakadeal5,"Ngoài ra, sản phẩm còn có điểm nổi bật là được trang bị công nghệ LED RGB 16.8 triệu màu. Với 6 nút, giúp bạn có thể lập trình thông qua phần mềm Logitech Gaming Software, người dùng có thể dễ dàng thiết lập các thao tác Macro"));
 
     }
 
