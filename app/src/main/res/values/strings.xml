@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Waka</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Mall</string>
+    <string name="title_notifications">Thông báo</string>
+    <string name="title_profile">Cá nhân</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Fragment Home -->
+    <string name="home_sneaker">Sneaker</string>
+    <string name="home_clothes">Quần Áo</string>
+    <string name="home_camera">Máy Ảnh</string>
+    <string name="home_smartphone">Điện Thoại</string>
+    <string name="home_foods">Đồ Ăn</string>
+    <string name="home_electronic">Thiết Bị Điện Tử</string>
+</resources>

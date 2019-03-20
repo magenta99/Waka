@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".ProductDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_redd"
+                    android:text="HOT"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:padding="6dp"
+                    android:textColor="#Ffff"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_gray"
+                    android:text="Trả góp 0%"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="16dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
+                    android:textColor="#000000"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:id="@+id/imgProductDetail"
+                android:background="@drawable/ipxr"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/tvNameProductDetail"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp"
+                android:textSize="18dp"
+                android:text="iPad WiFi 128GB New 2018 Pink"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9.990.000"
+                    android:textSize="18dp"
+                    android:id="@+id/tvPriceProductDetail"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorRed"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Đ"
+                    android:textSize="18dp"
+
+                    android:layout_marginLeft="3dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorRed"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mô Tả Sản Phẩm"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:layout_marginTop="12dp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="iPad WiFi 128GB New 2018 vẫn giữ phong cách thiết
+kế quen thuộc như phiên bản tiền nhiệm 2017 với
+chất liệu nhôm nguyên khối cao cấp, các cạnh được
+bo cong mềm mại, tạo cảm giác cầm nắm thoải mái
+và chắc tay."
+                android:textSize="15dp"
+                android:id="@+id/tvDescriptionDetail"
+                android:textColor="#000000"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
