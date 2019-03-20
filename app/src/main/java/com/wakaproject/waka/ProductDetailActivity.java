@@ -20,6 +20,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("");
 
         imgProductDetail = (ImageView) findViewById(R.id.imgProductDetail);
         tvNameProductDetail = (TextView) findViewById(R.id.tvNameProductDetail);

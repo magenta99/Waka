@@ -10,7 +10,7 @@ import static com.wakaproject.waka.Constant.PRODUCT_TABLE;
 
 public class Database extends SQLiteOpenHelper {
     public Database(Context context){
-        super(context,"lehuyanh91.sql",null,1);
+        super(context,"lehuyanh87.sql",null,1);
     }
 
     @Override

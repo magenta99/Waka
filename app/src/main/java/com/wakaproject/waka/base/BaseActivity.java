@@ -39,7 +39,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public byte[] setByteArray(Bitmap bitmap) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 10, bos);
         return bos.toByteArray();
     }
 
