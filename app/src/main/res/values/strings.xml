@@ -9,10 +9,10 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Fragment Home -->
-    <string name="home_sneaker">Sneaker</string>
-    <string name="home_clothes">Quần Áo</string>
+    <string name="home_smartwatch">Đồng hồ</string>
+    <string name="home_laptop">Laptop</string>
     <string name="home_camera">Máy Ảnh</string>
     <string name="home_smartphone">Điện Thoại</string>
-    <string name="home_foods">Đồ Ăn</string>
-    <string name="home_electronic">Thiết Bị Điện Tử</string>
+    <string name="home_accessories">Phụ Kiện</string>
+    <string name="home_tablet">Tablet</string>
 </resources>

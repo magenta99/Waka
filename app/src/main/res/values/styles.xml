@@ -8,11 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemeWaka" parent="Theme.AppCompat">
+    <style name="AppThemeWaka" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorGreen</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/background_material_dark</item>
+        <item name="android:navigationBarColor">@color/colorBlack</item>
+        <item name="android:textColorPrimary">@color/colorBackground</item>
     </style>
 
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,16 +13,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.wakaproject.waka.Product;
-import com.wakaproject.waka.ProductDetailActivity;
+import com.wakaproject.waka.LoadingImageTask;
+import com.wakaproject.waka.model.Product;
+import com.wakaproject.waka.activity.ProductDetailActivity;
 import com.wakaproject.waka.R;
 
 import java.io.ByteArrayInputStream;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class WakaDealsAdapter extends RecyclerView.Adapter<WakaDealsAdapter.WakaDealsHolder> {
     public Context context;
     public List<Product> productList;
+
 
     public WakaDealsAdapter(Context context, List<Product> productList) {
         this.context = context;
@@ -40,18 +44,22 @@ public class WakaDealsAdapter extends RecyclerView.Adapter<WakaDealsAdapter.Waka
     public void onBindViewHolder(@NonNull WakaDealsAdapter.WakaDealsHolder wakaDealsHolder, final int i) {
         wakaDealsHolder.product = productList.get(i);
         wakaDealsHolder.tvNameProduct.setText(wakaDealsHolder.product.PRODUCT_NAME);
-        wakaDealsHolder.tvPriceProduct.setText(String.valueOf(wakaDealsHolder.product.PRODUCT_PRICE));
+        final DecimalFormat f = new DecimalFormat("###,###,###");
+        wakaDealsHolder.tvPriceProduct.setText(f.format(wakaDealsHolder.product.PRODUCT_PRICE));
         wakaDealsHolder.imgProduct.setImageBitmap(ByteArrayToBitmap(wakaDealsHolder.product.PRODUCT_IMAGE));
         wakaDealsHolder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 Product p = productList.get(i);
-                intent.putExtra("image",p.PRODUCT_IMAGE);
+                intent.putExtra("id",p.PRODUCT_ID);
                 intent.putExtra("name",p.PRODUCT_NAME);
-                intent.putExtra("price",String.valueOf(p.PRODUCT_PRICE));
+                intent.putExtra("price",f.format(p.PRODUCT_PRICE));
+                intent.putExtra("priceproduct",String.valueOf(p.PRODUCT_PRICE));
                 intent.putExtra("description",p.PRODUCT_DESCRIPTION);
+
                 context.startActivity(intent);
+
             }
         });
     }

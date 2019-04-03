@@ -6,7 +6,7 @@
     
     <LinearLayout
         android:layout_width="175dp"
-        android:layout_height="195dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:padding="8dp">
 
@@ -15,14 +15,14 @@
         android:layout_height="125dp"
         android:layout_gravity="center"
         android:id="@+id/imgProduct"
-
         />
 
     <TextView
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:id="@+id/tvNameProduct"
-        android:text="iPad WiFi 128GB New 2018 Pink"/>
+        android:text="iPad WiFi 128GB New 2018 Pink"
+        android:layout_marginTop="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

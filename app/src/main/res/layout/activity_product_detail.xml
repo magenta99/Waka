@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context=".ProductDetailActivity">
+    tools:context=".activity.ProductDetailActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -125,6 +125,7 @@ và chắc tay."
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:paddingRight="50dp"
+                android:id="@+id/btnAddProduct"
                 android:drawableLeft="@drawable/ic_shopping_cart_black_24dp"
                 />
 
