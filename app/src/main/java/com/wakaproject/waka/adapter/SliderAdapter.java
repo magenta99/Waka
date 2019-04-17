@@ -17,26 +17,26 @@ import com.wakaproject.waka.activity.HomeActivity;
 
 public class SliderAdapter extends PagerAdapter {
 
-    Context context;
-    LayoutInflater layoutInflater;
+    private Context context;
+    private LayoutInflater layoutInflater;
 
     public SliderAdapter(Context context) {
         this.context = context;
     }
 
-    public int[] slider_images = {
+    private int[] slider_images = {
             R.drawable.color,
             R.drawable.deliverytruck,
             R.drawable.pay,
     };
 
-    public String[] slider_headings = {
+    private String[] slider_headings = {
             "ĐA DẠNG SẢN PHẨM",
             "GIAO HÀNG NHANH CHÓNG",
             "ĐẶT HÀNG DỄ DÀNG"
     };
 
-    public String[] slider_des = {
+    private String[] slider_des = {
             "Waka cung cấp cho người dùng không chỉ đầy đủ những mặt hàng mà còn đảm bảo chất lượng luôn đi đầu so với thị trường.",
             "Waka hiện đang liên kết với những đối tác vận chuyển lớn nhất toàn quốc giúp cho việc giao hàng diễn ra rất nhanh chóng",
             "Với Waka bạn chỉ cần thêm hàng vào giỏ và có thể thanh toán dễ dàng tại bất cứ đâu, bất cứ lúc nào mà bạn mong muốn."
@@ -49,7 +49,7 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
-        return view == (ConstraintLayout) o;
+        return view == o;
     }
 
     @NonNull
@@ -58,10 +58,10 @@ public class SliderAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slider_layout, container, false);
 
-        ImageView sliderImageView = (ImageView) view.findViewById(R.id.imgSlider);
-        TextView tvHeading = (TextView) view.findViewById(R.id.tvHeading);
-        TextView tvDes = (TextView) view.findViewById(R.id.tvDescription);
-        Button btnDiscover = (Button)view.findViewById(R.id.btnSlider);
+        ImageView sliderImageView = view.findViewById(R.id.imgSlider);
+        TextView tvHeading = view.findViewById(R.id.tvHeading);
+        TextView tvDes = view.findViewById(R.id.tvDescription);
+        Button btnDiscover = view.findViewById(R.id.btnSlider);
 
         btnDiscover.setOnClickListener(new View.OnClickListener() {
             @Override

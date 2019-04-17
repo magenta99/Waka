@@ -1,8 +1,12 @@
-package com.wakaproject.waka;
+package com.wakaproject.waka.database;
+
+import java.text.DecimalFormat;
 
 public class Constant {
-    public static final String PRODUCT_TABLE = "SanPham";
+    public static final DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 
+    //SẢN PHẨM
+    public static final String PRODUCT_TABLE = "SanPham";
     public static final String PRODUCT_ID = "MaSanPham";
     public static final String PRODUCT_NAME = "TenSanPham";
     public static final String PRODUCT_TYPE = "TheLoai";
@@ -11,6 +15,7 @@ public class Constant {
     public static final String PRODUCT_PRICE = "GiaThanh";
     public static final String PRODUCT_IMAGE = "HinhAnh";
     public static final String PRODUCT_DESCRIPTION = "MoTa";
+
 
     public static final String CREATE_PRODUCT_TABLE = "CREATE TABLE " + PRODUCT_TABLE + "(" +
             "" + PRODUCT_ID + " NCHAR(7) PRIMARY KEY NOT NULL," +
@@ -23,10 +28,21 @@ public class Constant {
             "" + PRODUCT_INVENTORYNUMBER + " INT" +
             ")";
 
+    //Voucher
+    public static final String VOUCHER_TABLE = "Voucher";
+    public static final String VOUCHER_NAME = "VoucherID";
+    public static final String VOUCHER_DISCOUNT = "PhanTram";
+
+    public static final String CREATE_VOUCHER_TABLE = "CREATE TABLE " + VOUCHER_TABLE + "(" +
+            "" + VOUCHER_NAME + " NCHAR(50) PRIMARY KEY NOT NULL," +
+            "" + VOUCHER_DISCOUNT + " DOUBLE" +
+            ")";
+
     //SẢN PHẨM TRONG GIỎ HÀNG
     public static final String PRODUCT_CART_TABLE = "GioHang";
 
     public static final String PRODUCT_CART_ID = "MaSanPham";
+    public static final String PRODUCT_CART_USERNAME = "Username";
     public static final String PRODUCT_CART_NAME = "TenSanPham";
     public static final String PRODUCT_CART_NUMBER = "SoLuong";
     public static final String PRODUCT_CART_PRICE = "GiaThanh";
@@ -36,10 +52,32 @@ public class Constant {
     public static final String CREATE_PRODUCT_CART_TABLE = "CREATE TABLE " + PRODUCT_CART_TABLE + "(" +
             "" + PRODUCT_CART_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             "" + PRODUCT_CART_NAME + " NVARCHAR(100)," +
+            "" + PRODUCT_CART_USERNAME + " NVARCHAR(100)," +
             "" + PRODUCT_CART_PRICE + " INT," +
             "" + PRODUCT_CART_IMAGE + " BLOB," +
             "" + PRODUCT_CART_NUMBER + " INT" +
             ")";
+
+    //ĐƠN HÀNG CỦA TÔI
+    public static final String MY_ORDER_TABLE = "DonHangCuaToi";
+
+    public static final String MY_ORDER_ID = "MaSanPham";
+    public static final String MY_ORDER_USERNAME = "Username";
+    public static final String MY_ORDER_NAME = "TenSanPham";
+    public static final String MY_ORDER_NUMBER = "SoLuong";
+    public static final String MY_ORDER_PRICE = "GiaThanh";
+    public static final String MY_ORDER_IMAGE = "HinhAnh";
+
+
+    public static final String CREATE_MY_ORDER_TABLE = "CREATE TABLE " + MY_ORDER_TABLE + "(" +
+            "" + MY_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "" + MY_ORDER_NAME + " NVARCHAR(100)," +
+            "" + MY_ORDER_USERNAME + " NVARCHAR(100)," +
+            "" + MY_ORDER_PRICE + " INT," +
+            "" + MY_ORDER_IMAGE + " BLOB," +
+            "" + MY_ORDER_NUMBER + " INT" +
+            ")";
+
 
     //USER
     public static final String USER_TABLE = "NguoiDung";
@@ -49,6 +87,7 @@ public class Constant {
     public static final String USER_PASSWORD = "Password";
     public static final String USER_PHONE = "Phone";
     public static final String USER_FULL_NAME = "HoTen";
+    public static final String USER_ADDRESS = "Diachi";
 
     //cau lenh tao bang nguoi dung
 
@@ -57,6 +96,7 @@ public class Constant {
     public static final String CREATE_USER_TABLE = "CREATE TABLE " + USER_TABLE + "(" +
             "" + USER_NAME + " NVARCHAR(50) PRIMARY KEY NOT NULL ," +
             "" + USER_PASSWORD + " NVARCHAR(50)," +
+            "" + USER_ADDRESS + " NVARCHAR(200)," +
             "" + USER_PHONE + " NCHAR(10)," +
             "" + USER_FULL_NAME + " NVARCHAR(50)" +
             ")";

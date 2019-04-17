@@ -24,21 +24,17 @@ public class SliderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slider);
-        btnSkip = (Button) findViewById(R.id.btnSkip);
+        initView();
+
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SliderActivity.this,HomeActivity.class);
+                Intent intent = new Intent(SliderActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
-        viewPager = (ViewPager) findViewById(R.id.sliderViewPager);
-        mDotsLayout = (LinearLayout) findViewById(R.id.dotsLayout);
-        sliderAdapter = new SliderAdapter(this);
         viewPager.setAdapter(sliderAdapter);
         addDot(0);
-        viewPager.setOnPageChangeListener(viewListener);
-
     }
 
     public void addDot(int position) {
@@ -60,7 +56,6 @@ public class SliderActivity extends AppCompatActivity {
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int i, float v, int i1) {
-
         }
 
         @Override
@@ -73,4 +68,11 @@ public class SliderActivity extends AppCompatActivity {
 
         }
     };
+
+    public void initView() {
+        btnSkip = findViewById(R.id.btnSkip);
+        viewPager = findViewById(R.id.sliderViewPager);
+        mDotsLayout = findViewById(R.id.dotsLayout);
+        sliderAdapter = new SliderAdapter(this);
+    }
 }

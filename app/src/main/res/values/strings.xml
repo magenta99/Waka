@@ -15,4 +15,40 @@
     <string name="home_smartphone">Điện Thoại</string>
     <string name="home_accessories">Phụ Kiện</string>
     <string name="home_tablet">Tablet</string>
+
+    <!--CartActivity-->
+    <string name="acti_cart_tv_thanhtien">Thành tiền</string>
+    <string name="acti_cart_title">Giỏ hàng</string>
+    <string name="acti_cart_tv_sumprice">29.990.000</string>
+    <string name="acti_cart_tv_freeship">Miễn phí vận chuyển</string>
+    <string name="acti_cart_btnPayment">Thanh toán</string>
+    <string name="acti_cart_mesWarning">Vui lòng chọn ít nhất một sản phẩm để thanh toán</string>
+
+    <!--LoginActivity-->
+    <string name="acti_login_welcome">Welcome Back!</string>
+    <string name="acti_login_tvUsername">Tên đăng nhập</string>
+    <string name="acti_login_tvPassword">Mật khẩu</string>
+    <string name="acti_login_btnSignIn">Đăng nhập</string>
+    <string name="acti_login_forgetPass">Quên mật khẩu?</string>
+    <string name="acti_login_noAccount">Chưa có tài khoản?</string>
+    <string name="acti_login_signUp">Đăng kí ngay</string>
+    <string name="acti_login_messSignInSucess">Vui lòng nhập đầy đủ thông tin</string>
+
+
+    <!--Cá nhân-->
+    <string name="fra_profile_yourorders">Đơn hàng của bạn</string>
+    <string name="fra_profile_changepass">Đổi mật khẩu</string>
+    <string name="fra_profile_sharefacebook">Chia sẻ lên facebook</string>
+    <string name="fra_profile_yourvoucher">Quà tặng</string>
+    <string name="fra_profile_shield">Bảo mật và điều khoản</string>
+    <string name="fra_profile_question">Câu hỏi thường gặp</string>
+    <string name="fra_profile_signout">Đăng xuất</string>
+
+    <string name="lgactivity_loginsuccess">Đăng nhập thành công</string>
+
+    <!--Đặt hàng thành công-->
+    <string name="acti_success_order">Đặt hàng thành công</string>
+    <string name="acti_success_order_description">Đơn hang của bạn đã được đặt thành công. Vui lòng kiểm tra Đơn hàng của tôi để biết thêm chi tiết !</string>
+
+
 </resources>

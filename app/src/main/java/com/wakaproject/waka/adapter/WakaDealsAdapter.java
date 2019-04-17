@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wakaproject.waka.LoadingImageTask;
+import com.wakaproject.waka.activity.HomeActivity;
+import com.wakaproject.waka.mainfragment.HomeFragment;
 import com.wakaproject.waka.model.Product;
 import com.wakaproject.waka.activity.ProductDetailActivity;
 import com.wakaproject.waka.R;
@@ -22,10 +24,11 @@ import java.io.ByteArrayInputStream;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import static com.wakaproject.waka.database.Constant.decimalFormat;
+
 public class WakaDealsAdapter extends RecyclerView.Adapter<WakaDealsAdapter.WakaDealsHolder> {
     public Context context;
     public List<Product> productList;
-
 
     public WakaDealsAdapter(Context context, List<Product> productList) {
         this.context = context;
@@ -44,22 +47,19 @@ public class WakaDealsAdapter extends RecyclerView.Adapter<WakaDealsAdapter.Waka
     public void onBindViewHolder(@NonNull WakaDealsAdapter.WakaDealsHolder wakaDealsHolder, final int i) {
         wakaDealsHolder.product = productList.get(i);
         wakaDealsHolder.tvNameProduct.setText(wakaDealsHolder.product.PRODUCT_NAME);
-        final DecimalFormat f = new DecimalFormat("###,###,###");
-        wakaDealsHolder.tvPriceProduct.setText(f.format(wakaDealsHolder.product.PRODUCT_PRICE));
+        wakaDealsHolder.tvPriceProduct.setText(decimalFormat.format(wakaDealsHolder.product.PRODUCT_PRICE));
         wakaDealsHolder.imgProduct.setImageBitmap(ByteArrayToBitmap(wakaDealsHolder.product.PRODUCT_IMAGE));
         wakaDealsHolder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProductDetailActivity.class);
+                Intent intent = new Intent(context,ProductDetailActivity.class);
                 Product p = productList.get(i);
                 intent.putExtra("id",p.PRODUCT_ID);
                 intent.putExtra("name",p.PRODUCT_NAME);
-                intent.putExtra("price",f.format(p.PRODUCT_PRICE));
+                intent.putExtra("price",new DecimalFormat("###,###,###").format(p.PRODUCT_PRICE));
                 intent.putExtra("priceproduct",String.valueOf(p.PRODUCT_PRICE));
                 intent.putExtra("description",p.PRODUCT_DESCRIPTION);
-
                 context.startActivity(intent);
-
             }
         });
     }

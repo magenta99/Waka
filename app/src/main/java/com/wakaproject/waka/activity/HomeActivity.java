@@ -1,6 +1,9 @@
 package com.wakaproject.waka.activity;
 
-import android.graphics.Bitmap;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,16 +11,18 @@ import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.Button;
 
+import com.wakaproject.waka.AlarmReceiver;
+import com.wakaproject.waka.SearchActivity;
 import com.wakaproject.waka.mainfragment.HomeFragment;
 import com.wakaproject.waka.mainfragment.MallFragment;
-import com.wakaproject.waka.mainfragment.NotificationFragment;
-import com.wakaproject.waka.model.Product;
 import com.wakaproject.waka.dao.ProductDAO;
 import com.wakaproject.waka.mainfragment.ProfileFragment;
 import com.wakaproject.waka.R;
 import com.wakaproject.waka.base.BaseActivity;
+
+import java.util.Calendar;
 
 public class HomeActivity extends BaseActivity {
     private ProductDAO productDAO;
@@ -26,22 +31,24 @@ public class HomeActivity extends BaseActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectFragment = null;
+            Fragment selectFragment ;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     selectFragment = new HomeFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, selectFragment).commit();
                     break;
                 case R.id.navigation_mall:
                     selectFragment = new MallFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, selectFragment).commit();
                     break;
                 case R.id.navigation_notifications:
-                    selectFragment = new NotificationFragment();
+                    startNewActivity(NotificationActivity.class);
                     break;
                 case R.id.navigation_profile:
                     selectFragment = new ProfileFragment();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, selectFragment).commit();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, selectFragment).commit();
             return true;
         }
     };
@@ -50,10 +57,23 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+
+        Intent notificationIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,23);
+        cal.set(Calendar.MINUTE,35);
+        cal.set(Calendar.SECOND,5);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_layout, new HomeFragment()).commit();
         productDAO = new ProductDAO(this);
+
 
 //        Bitmap waka = convertDrawabletoBitmap(R.drawable.ipad);
 //        Bitmap waka1 = convertDrawabletoBitmap(R.drawable.deal_macbook);
@@ -64,8 +84,8 @@ public class HomeActivity extends BaseActivity {
 //        byte[] wakadeal1 = setByteArray(waka1);
 //        byte[] wakadeal2 = setByteArray(waka2);
 //        byte[] wakadeal3 = setByteArray(waka3);
-
-
+//
+//
 //        productDAO.insertProduct(new Product("ID01", "iPad WiFi 128GB New 2018 White", "WakaDeals",
 //                100, 100, 9000000, wakadeal,
 //                "iPad WiFi 128GB New 2018 vẫn giữ phong cách thiết kế quen thuộc như phiên bản tiền nhiệm 2017 với chất liệu nhôm nguyên khối cao cấp, các cạnh được bo cong mềm mại, tạo cảm giác cầm nắm thoải mái và chắc tay"));
@@ -78,9 +98,9 @@ public class HomeActivity extends BaseActivity {
 //        productDAO.insertProduct(new Product("ID04", "Đồng Hồ Apple Watch Series 4 GPS", "WakaDeals",
 //                100, 100, 11990000, wakadeal3,
 //                "Đồng Hồ Thông Minh Apple Watch Series 4 GPS Sport band VN/A sở hữu thiết kế không viền nhờ phần màn hình lớn hơn và được bo cong ở các góc. Nhờ vậy, kích thước của màn hình đã tăng 30%"));
-
-
-        //PHONE
+//
+//
+//        //PHONE
 //        Bitmap phone = convertDrawabletoBitmap(R.drawable.phone_huawei3i);
 //        Bitmap phone1 = convertDrawabletoBitmap(R.drawable.phone_hueweip9);
 //        Bitmap phone2 = convertDrawabletoBitmap(R.drawable.phone_ip8plus);
@@ -98,7 +118,7 @@ public class HomeActivity extends BaseActivity {
 //        byte[] deal_phone5 = setByteArray(phone5);
 //        byte[] deal_phone6 = setByteArray(phone6);
 //        byte[] deal_phone7 = setByteArray(phone7);
-
+//
 //        productDAO.insertProduct(new Product("ID05", "Điện thoại Huawei Nova 3i Gray", "Phone",
 //                100, 100, 5490000, deal_phone,
 //                "Nova 3i sở hữu mặt lưng kính chuyển màu gradient kiểu như điện thoại Huawei P20 Pro, nhờ thiết kế mặt lưng kính ấn tượng đã đem lại cho máy một thiết kế hiện đại và tinh tế. Chiếc điện thoại Huawei này sở hữu cụm camera kép ở mặt lưng với cảm biến chính 16 MP và cảm biến phụ 2 MP có khả năng lấy nét rất nhanh"));
@@ -123,9 +143,9 @@ public class HomeActivity extends BaseActivity {
 //        productDAO.insertProduct(new Product("ID12", "Điện thoại Oppo F11 Pro Đen Thạch Anh", "Phone",
 //                100, 100, 22490000, deal_phone7,
 //                "Với việc trang bị camera selfie trượt độc đáo, F11 pro sở hữu màn hình toàn cảnh Panoramic hoàn hảo với khung viền siêu mỏng, kích thước màn hình 6.5 inch, tỉ lệ hiển thị 90,9% mang đến trải nghiệm hình ảnh cực chất"));
-
-
-        //LAPTOP
+//
+//
+//        //LAPTOP
 //        Bitmap laptop = convertDrawabletoBitmap(R.drawable.laptop_macbookpro);
 //        Bitmap laptop1 = convertDrawabletoBitmap(R.drawable.laptop_asuss15);
 //        Bitmap laptop2 = convertDrawabletoBitmap(R.drawable.laptop_hp);
@@ -135,7 +155,7 @@ public class HomeActivity extends BaseActivity {
 //        byte[] deal_lap1 = setByteArray(laptop1);
 //        byte[] deal_lap2 = setByteArray(laptop2);
 //        byte[] deal_lap3 = setByteArray(laptop3);
-
+//
 //        productDAO.insertProduct(new Product("ID13", "Macbook Pro 13 inch 128GB (2017)", "Laptop",
 //                100, 100, 33990000, deal_lap,
 //                "Thế hệ MacBook Pro 13 inch 2017 ngoài việc cập nhật bộ vi xử lý Intel thế hệ thứ 7 (Kaby Lake) thì còn được nâng cấp gấp đôi dung lượng bộ nhớ. Ngoài ra thiết kế cũng như một số tính năng nổi bật vẫn không có thay đổi so với dòng MacBook 2016"));
@@ -148,7 +168,82 @@ public class HomeActivity extends BaseActivity {
 //        productDAO.insertProduct(new Product("ID16", "Macbook Air 13 128GB 2018 Pink", "Laptop",
 //                100, 100, 28790000, deal_lap3,
 //                "Tình yêu dành cho MacBook Air đã quay trở lại với thiết kế mới. Bạn sẽ có 3 phiên bản màu bạc, xám và vàng. MacBook Air mới mỏng hơn, nhẹ hơn, sở hữu màn hình Retina rực rỡ, cảm biến vân tay Touch ID, bàn phím cách bướm thế hệ mới nhất và bàn di chuột cảm ứng lực Force Touch. Với chất liệu làm từ 100% nhôm có thể tái chế, MacBook Air 2018 là chiếc laptop thân thiện nhất với môi trường"));
-
+//
+//        //Tablet
+//        Bitmap tablet = convertDrawabletoBitmap(R.drawable.tablet_galaxya);
+//        Bitmap tablet1 = convertDrawabletoBitmap(R.drawable.tablet_ipadpro11);
+//        Bitmap tablet2 = convertDrawabletoBitmap(R.drawable.tablet_galaxya6);
+//        Bitmap tablet3 = convertDrawabletoBitmap(R.drawable.tablet_ipadpro105);
+//
+//        byte[] deal_tab = setByteArray(tablet);
+//        byte[] deal_tap1 = setByteArray(tablet1);
+//        byte[] deal_tap2 = setByteArray(tablet2);
+//        byte[] deal_tap3 = setByteArray(tablet3);
+//
+//        productDAO.insertProduct(new Product("ID17", "Samsung Galaxy Tab A 10.5 inch", "Tablet",
+//                100, 100, 9490000, deal_tab,
+//                "Samsung Galaxy Tab A 10.5 inch được trang bị màn hình IPS LCD với độ phân giải 1.920 x 1.200 pixels, viền bezels được làm mỏng cho hình ảnh hiển thị chi tiết dễ dàng đọc sách hay xem phim phụ đề mà không sợ bị mỏi mắt.Được sở hữu bộ vi xử lý Snapdragon 450 với tốc độ 1.8GHz kết hợp với 3 GB RAM, 32 GB ROM cho hiệu năng khá ổn định khi thực hiện các tác vụ cơ bản."));
+//        productDAO.insertProduct(new Product("ID18", "iPad Pro 11 inch Wifi 64GB (2018)", "Tablet",
+//                100, 100, 2190000, deal_tap1,
+//                "iPad Pro 11 inch 64GB Wifi (2018) sở hữu ngoại hình hoàn toàn mới, viền màn hình được thu hẹp hơn, 4 cạnh được vát mạnh đã khiến máy trở thành một trong những chiếc máy tính bảng đẹp nhất, đẳng cấp nhất hiện tại.Nút Home trên thế hệ mới đã được loại bỏ, các thao tác về lại màn hình chính, mở thanh thông báo, mở đa nhiệm, bảng điều khiển,... đều có thể sử dụng dễ dàng thông qua các thao tác kéo vuốt thả trên màn hình chính."));
+//        productDAO.insertProduct(new Product("ID19", "Samsung Galaxy Tab A6 10.1 Spen", "Tablet",
+//                100, 100, 7490000, deal_tap2,
+//                "Được trang bị chip Exynos 7870 8 nhân 3 GB RAM cùng 16 GB bộ nhớ trong, Samsung Galaxy Tab A6 10.1 Spen có hiệu năng khá ổn định so với mức giá.Khả năng đa nhiệm của máy được tối ưu với RAM lớn và màn hình lớn thuận tiện cho các ứng dụng văn phòng, các công cụ giải trí...Máy cũng hỗ trợ khe cắm thẻ nhớ mở rộng tối đa lên tới 256 GB cùng 1 khe cắm Nano Sim và kết nối 4G tốc độ cao giúp bạn truy cập internet với tốc độ nhanh chóng."));
+//        productDAO.insertProduct(new Product("ID20", "iPad Pro 10.5 inch Wifi 64GB (2017)", "Tablet",
+//                100, 100, 16590000, deal_tap3,
+//                "Điểm khác biệt lớn nhất ở mẫu iPad Pro 10.5 inch Wifi 64GB (2017) so với các thế hệ iPad cũ chính là phần viền màn hình của máy giờ đây đã được làm mỏng hơn rất nhiều so với các đàn anh đi trước.Cấu hình cực mạnh chính là điểm đáng chú ý nhất của máy khi sử dụng con chip mới Apple A10X 6 nhân 64-bit cho hiệu năng tăng ấn tượng và khả năng tiết kiệm pin tốt hơn."));
+//
+//         // Watch
+//        Bitmap watch = convertDrawabletoBitmap(R.drawable.watchh_ss);
+//        Bitmap watch1 = convertDrawabletoBitmap(R.drawable.watchh_40s4);
+//        Bitmap watch2 = convertDrawabletoBitmap(R.drawable.watchh_42s3);
+//        Bitmap watch3 = convertDrawabletoBitmap(R.drawable.watchh_44s4);
+//
+//        byte[] deal_watch = setByteArray(watch);
+//        byte[] deal_watch1 = setByteArray(watch1);
+//        byte[] deal_watch2 = setByteArray(watch2);
+//        byte[] deal_watch3 = setByteArray(watch3);
+//
+//        productDAO.insertProduct(new Product("ID21", "Samsung Galaxy Watch 46mm Black", "Watch",
+//                100, 100, 7490000, deal_watch,
+//                "Tổng thể Samsung Galaxy Watch 46mm có màu đen huyền sang trọng đi cùng thiết kế truyền thống với mặt đồng hồ tròn cổ điển, vòng xoay bezel cho khả năng điều hướng dễ dàng.Samsung mang đến dây đeo với chất liệu silicone cho bạn cảm giác thoải mái khi đeo trong thời gian dài. Bên cạnh đó, các nút cài trên dây cho bạn khả năng đều chỉnh đồng hồ phù hợp với độ rộng của cổ tay."));
+//        productDAO.insertProduct(new Product("ID22", "Apple Watch S4 GPS 40mm White", "Watch",
+//                100, 100, 11990000, deal_watch1,
+//                "Apple Watch S4 GPS 40mm viền nhôm dây cao su màu trắng có thiết kế với dây đeo sử dụng chất liệu cao su với nút cài, tiện lợi điều chỉnh độ rộng của dây phù hợp với cổ tay người đeo.Bốn cạnh trên màn hình của Apple S4 GPS 40mm được bo cong mềm mại, chất lượng hình ảnh, thông tin hiển thị trên màn hình cũng rõ ràng hơn, màu sắc sắc nét, dễ nhìn dưới ánh nắng mặt trời."));
+//        productDAO.insertProduct(new Product("ID23", "Apple Watch S3 GPS 42mm Gray", "Watch",
+//                100, 100, 8490000, deal_watch2,
+//                "Về mặt tổng thể đồng hồ thông minh Apple Watch S3 GPS 42mm có kích thước tương tự như Apple Watch Series 2. Sản phẩm chú trọng thêm về mặt thẩm mỹ với thiết kế sang trọng, năng động, dây đeo có nhiều màu sắc khác nhau.Dây đeo của Apple Watch S3 GPS, 42mm viền nhôm được thiết kế với khả năng dễ dàng tháo rời, cho phép người dùng linh hoạt thay đổi bằng các dây đeo màu sắc khác."));
+//        productDAO.insertProduct(new Product("ID24", "Apple Watch S4 GPS 44mm Pink", "Watch",
+//                100, 100, 12490000, deal_watch3,
+//                "Apple Watch S4 GPS 44mm viền nhôm dây vải màu hồng có thiết kế khá đơn giản và nổi bật. Sử dụng dây từ chất liệu vải, giúp đồng hồ cá tính hơn, nhẹ nhàng hơn khi đeo trong thời gian dài. Ngoài ra dây vải còn giúp bạn thấy dễ chịu hơn khi tay ra mồ hôi lúc vận động nhiều.Mang một thiết kế thanh thoát hơn với màn hình lớn, nhưng vẫn giữ được kích thước cũ, cùng với dây đeo vải giúp cho trọng lượng khi đeo Apple Watch vô cùng nhẹ nhàng. Thân đồng hồ mỏng hơn cũng giúp tăng phần thời trang khi đeo đồng hồ. "));
+//
+//
+//        //Accessories
+//        Bitmap accessories = convertDrawabletoBitmap(R.drawable.accessories_cap);
+//        Bitmap accessories1 = convertDrawabletoBitmap(R.drawable.accessories_loa);
+//        Bitmap accessories2 = convertDrawabletoBitmap(R.drawable.accessories_mouse);
+//        Bitmap accessories3 = convertDrawabletoBitmap(R.drawable.accessories_pin);
+//
+//        byte[] deal_accessories = setByteArray(accessories);
+//        byte[] deal_accessories1 = setByteArray(accessories1);
+//        byte[] deal_accessories2 = setByteArray(accessories2);
+//        byte[] deal_accessories3 = setByteArray(accessories3);
+//
+//        productDAO.insertProduct(new Product("ID25", "Dây cáp Micro USB 1 m eSaver DS118", "Accessories",
+//                100, 100, 51000, deal_accessories,
+//                "Thiết kế đơn giản, chiều dài dây thích hợp.Với chiều dài dây 1 m có thế tối ưu hóa khả năng công việc bằng cách vừa kết nối với máy tính để truyền dữ liệu, vừa sử dụng điện thoại cùng 1 lúc.Cáp có phần đầu micro USB kết nối với hầu hết cổng điện thoại hiện nay; đầu cáp USB tương thích với mọi adapter hay cổng trên tivi, laptop, pin sạc."));
+//        productDAO.insertProduct(new Product("ID26", "Loa bluetooth Sony SRS-XB01", "Accessories",
+//                100, 100, 799000, deal_accessories1,
+//                "Loa bluetooth Sony SRS-XB01 với thiết kế nhỏ gọn, di động, dễ mang lại di chuyển. Khả năng chống thấm nước đạt chuẩn IPX5. Tích hợp các nút điều khiển trên loa: bật nguồn, phát nhạc, tăng âm lượng. Với micro tích hợp, nhận cuộc gọi trên điện thoại thông minh qua loa chưa bao giờ dễ dàng đến thế.Loa có thiết kế tròn cùng công nghệ Extra Bass cho âm thanh bùng nổ và sôi động hơn với chất âm được phát ra ở mặt trước của loa."));
+//        productDAO.insertProduct(new Product("ID27", "Chuột Bluetooth Logitech M337", "Accessories",
+//                100, 100, 510000, deal_accessories2,
+//                "- Thiết kế nhỏ gọn, dễ dàng mang đi hay cất giữ.\n" +
+//                        "- Nhờ cảm biến quang học laze, M337 hoạt động trên nhiều bề mặt.\n" +
+//                        "- Hình dáng uốn lượn với phần tay cầm bọc cao su, giúp người dùng thoải mái trong quá trình sử dụng.\n" +
+//                        "- Tương thích với nhiều thiết bị: Windows® 7, Windows 8, Windows 10 trở lên, Mac OS X 10.8 trở lên, Chrome OS™, Android™ 3.2 trở lên."));
+//        productDAO.insertProduct(new Product("ID28", "Pin sạc dự phòng 5.000 mAh eSaver", "Accessories",
+//                100, 100, 169000, deal_accessories3,
+//                "Thiết kế vỏ nhôm sang trọng nhưng vẫn mang lại cảm giác chắc chắn. Mọi chi tiết đều được hoàn thiện tinh tế, hai cạnh bên bo cong giúp bạn thoải mái cầm nắm trong lòng bàn tay. Đặc biệt, ở phiên bản mới này Xiaomi bổ sung thêm màu xanh đen cho sản phẩm, màu lạ nhưng rất bắt mắt.Với ngân sách tiết kiệm, ở tầm giá 329.000 đ (đang được khuyến mãi từ mức giá 399.000 đ), Xiaomi 10.000 mAh Gen 2 là một lựa chọn thông minh dành cho bạn."));
 
     }
 
